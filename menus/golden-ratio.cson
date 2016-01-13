@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle golden-ratio'
+      'command': 'golden-ratio:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'golden-ratio'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'golden-ratio:toggle'
+        }
+      ]
+    ]
+  }
+]
