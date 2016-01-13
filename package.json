@@ -1,7 +1,7 @@
 {
   "name": "golden-ratio",
   "main": "./lib/golden-ratio",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Automaticaly resize active pane",
   "keywords": [
     "golden-ratio",
@@ -18,6 +18,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
