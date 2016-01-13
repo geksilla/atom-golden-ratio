@@ -11,3 +11,9 @@ add custom keymap:
 'atom-workspace':
   '<your_keys_here>': 'golden-ratio:toggle'
 ```
+
+## Configuration
+
+Name                       | Default | Description
+---------------------------|---------|------------
+'golden-ratio.scaleFactor' | 1       | Scale factor

@@ -4,12 +4,20 @@ module.exports = GoldenRatio =
   subscriptions: null
   paneSubscription: null
   active: false
+  scaleFactor: 1
+
+  config:
+    scaleFactor:
+      type: "number"
+      default: 1
 
   activate: (state) ->
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
     @paneSubscription = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-workspace', 'golden-ratio:toggle': => @toggle()
+    @subscriptions.add atom.config.onDidChange 'golden-ratio.scaleFactor', {}, =>
+       @scaleFactor = atom.config.get 'golden-ratio.scaleFactor'
 
   deactivate: ->
     @subscriptions.dispose()
@@ -38,7 +46,7 @@ module.exports = GoldenRatio =
     parent = pane.getParent()
     if parent.children
       parent.children.map (item) -> item.setFlexScale(1)
-      pane.setFlexScale parent.children.length
+      pane.setFlexScale parent.children.length*@scaleFactor
       @resizePanes parent
 
   resetPanes: (pane)->
