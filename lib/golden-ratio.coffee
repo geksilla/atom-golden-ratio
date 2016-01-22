@@ -18,6 +18,7 @@ module.exports = GoldenRatio =
     @subscriptions.add atom.commands.add 'atom-workspace', 'golden-ratio:toggle': => @toggle()
     @subscriptions.add atom.config.onDidChange 'golden-ratio.scaleFactor', {}, =>
        @scaleFactor = atom.config.get 'golden-ratio.scaleFactor'
+       @resizePanes atom.workspace.getActivePane() if @active
 
   deactivate: ->
     @subscriptions.dispose()
@@ -43,6 +44,7 @@ module.exports = GoldenRatio =
       @resizePanes atom.workspace.getActivePane()
 
   resizePanes: (pane)->
+    return unless pane
     parent = pane.getParent()
     if parent.children
       parent.children.map (item) -> item.setFlexScale(1)
