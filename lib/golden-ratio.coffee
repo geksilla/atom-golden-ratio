@@ -6,10 +6,10 @@ module.exports = GoldenRatio =
   active: false
   scaleFactor: 1
 
-  config:
-    scaleFactor:
-      type: "number"
-      default: 1
+  # config:
+  #   scaleFactor:
+  #     type: "number"
+  #     default: 1
 
   activate: (state) ->
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable

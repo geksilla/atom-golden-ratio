@@ -10,6 +10,12 @@
     "resize",
     "pane"
   ],
+  "configSchema": {
+    "scaleFactor": {
+      "type": "number",
+      "default": 1
+    }
+  },
   "activationCommands": {
     "atom-workspace": "golden-ratio:toggle"
   },
