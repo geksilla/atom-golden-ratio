@@ -12,6 +12,8 @@ add custom keymap:
   '<your_keys_here>': 'golden-ratio:toggle'
 ```
 
+For better experience uncheck __Soft Wrap__ option from __Settings View -> Settings -> Editor__.
+
 ## Configuration
 
 Name                       | Default | Description
