@@ -16,16 +16,15 @@ module.exports = GoldenRatio =
     @subscriptions = new CompositeDisposable
     @paneSubscription = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-workspace', 'golden-ratio:toggle': => @toggle()
-    @subscriptions.add atom.config.onDidChange 'golden-ratio.scaleFactor', {}, =>
-       @scaleFactor = atom.config.get 'golden-ratio.scaleFactor'
-       @resizePanes atom.workspace.getActivePane() if @active
+    @subscriptions.add atom.config.onDidChange 'golden-ratio.scaleFactor',
+      ({newValue: @scaleFactor}) => @resizePanes()
 
   deactivate: ->
     @subscriptions.dispose()
     @paneSubscription?.dispose()
 
   subscribePane: ->
-    @paneSubscription.add atom.workspace.onDidChangeActivePane => @activePaneChanged()
+    @paneSubscription.add atom.workspace.onDidChangeActivePane => @resizePanes()
 
   unSubscribePane: ->
     @paneSubscription.dispose()
@@ -34,21 +33,18 @@ module.exports = GoldenRatio =
     @active = !@active
     if @active
       @subscribePane()
-      @resizePanes atom.workspace.getActivePane()
+      @scaleFactor = atom.config.get 'golden-ratio.scaleFactor'
+      @resizePanes()
     else
       @unSubscribePane()
       @resetPanes atom.workspace.paneContainer.root
 
-  activePaneChanged: ->
-    if @active
-      @resizePanes atom.workspace.getActivePane()
-
-  resizePanes: (pane)->
-    return unless pane
+  resizePanes: (pane = atom.workspace.getActivePane()) ->
+    return unless pane and @active
     parent = pane.getParent()
     if parent.children
       parent.children.map (item) -> item.setFlexScale(1)
-      pane.setFlexScale parent.children.length*@scaleFactor
+      pane.setFlexScale parent.children.length * @scaleFactor
       @resizePanes parent
 
   resetPanes: (pane)->
