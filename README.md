@@ -1,5 +1,7 @@
 # golden-ratio package
 
+### :warning: Looking for maintainers! :warning:
+
 Golden ratio scaling for panes. Automaticaly resize pane with active item.
 ![golden-ratio-demo](http://i.imgur.com/FuzyCXa.gif)
 
